@@ -45,6 +45,17 @@ public class GetAxes {
             System.exit(0);
         }
 
+        Arrays.sort(xVals);
+        Arrays.sort(yVals);
+
+        for (int element : xVals) {
+            System.out.println("xVal: " + element);
+        }
+
+        for (int element : yVals) {
+            System.out.println("yVal: " + element);
+        }
+
         // Invoke method to determine axes range.
         writeAxes(xVals, yVals, numCoords);
     }
