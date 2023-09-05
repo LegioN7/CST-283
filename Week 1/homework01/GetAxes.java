@@ -3,6 +3,7 @@
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class GetAxes {
     static final String FILENAME = "data.txt";
@@ -34,6 +35,7 @@ public class GetAxes {
             while (inputFile.hasNext()) {
                 xVals[i] = inputFile.nextInt();
                 yVals[i] = inputFile.nextInt();
+                i++;
             }
             numCoords = i;
             inputFile.close();
@@ -45,52 +47,44 @@ public class GetAxes {
             System.exit(0);
         }
 
-        Arrays.sort(xVals);
-        Arrays.sort(yVals);
-
-        for (int element : xVals) {
-            System.out.println("xVal: " + element);
-        }
-
-        for (int element : yVals) {
-            System.out.println("yVal: " + element);
-        }
+        int[] newxVals = IntStream.of(xVals).filter(i -> i != 0).toArray();
+        int[] newyVals = IntStream.of(yVals).filter(i -> i != 0).toArray();
 
         // Invoke method to determine axes range.
-        writeAxes(xVals, yVals, numCoords);
+        writeAxes(newxVals, newyVals, numCoords);
     }
 
     // This method receives parallel integer arrays of (x,y) coordinates.
     // It seeks the max and min of each set in order to define graphing axes ranges.
     // Arrays contain 'n' elements.
-    public static void writeAxes(int xVals[], int yVals[], int numCoords) {
+    public static void writeAxes(int newxVals[], int newyVals[], int numCoords) {
         int minX = 999;
         int maxX = -999;
         int minY = 999;
         int maxY = -999;
 
         // Process arrays to seek min and max for both
-        Arrays.sort(xVals);
-        Arrays.sort(yVals);
+        Arrays.sort(newxVals);
+        Arrays.sort(newyVals);
 
-        int smallestX = xVals[0];
-        int biggestX = xVals[0];
+        int smallestX = newxVals[0];
+        int biggestX = newxVals[0];
         // Enter your new code here
-        for (int i = 0; i < xVals.length; i++) {
-            if (xVals[i] < smallestX)
-                smallestX = xVals[i];
-            if (xVals[i] > biggestX)
-                biggestX = xVals[i];
+        for (int i = 0; i < newxVals.length; i++) {
+            if (newxVals[i] < smallestX)
+                smallestX = newxVals[i];
+            if (newxVals[i] > biggestX)
+                biggestX = newxVals[i];
         }
 
-        int smallestY = yVals[0];
-        int biggestY = yVals[0];
+        int smallestY = newyVals[0];
+        int biggestY = newyVals[0];
         // Enter your new code here
-        for (int i = 0; i < yVals.length; i++) {
-            if (yVals[i] < smallestY)
-                smallestY = yVals[i];
-            if (yVals[i] > biggestY)
-                biggestY = yVals[i];
+        for (int i = 0; i < newyVals.length; i++) {
+            if (newyVals[i] < smallestY)
+                smallestY = newyVals[i];
+            if (newyVals[i] > biggestY)
+                biggestY = newyVals[i];
         }
 
         minX = smallestX;
