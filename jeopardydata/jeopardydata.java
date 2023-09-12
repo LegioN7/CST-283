@@ -58,8 +58,10 @@ public class jeopardydata {
         System.out.println("Welcome to the Jeopardy Data Search Program");
         do {
 
-            System.out.println("Type 1 to Query by Date");
-            System.out.println("Type 2 to Query by Category");
+            System.out.println("Type 1 to Search by Date");
+            System.out.println("Type 2 to Search by Category");
+            System.out.println("Type 3 to Search by Keyword");
+            System.out.println("Type 4 to Search Final Jeopardy by Year");
             System.out.println("Type 0 to Exit");
 
             // Read the next Int for Menu Input
@@ -83,11 +85,44 @@ public class jeopardydata {
                     String queryRound;
                     queryRound = scn.next();
 
+                    do {
+                        System.out.println("Invalid Entry - Please input a Category");
+                        queryRound = scn.next();
+                    } while (queryRound == "Final Jeopardy!" || queryRound == "Double Jeopardy!" || queryRound == "Jeopardy!");
+
                     for (JeopardyQuestion g : questions)
                         if (g.getRound().equals(queryRound))
                             System.out.println(g);
+                    break;
                 case 3:
+                    System.out.println("Search by Keyword");
+
+                    String queryKeyword;
+                    queryKeyword = scn.next();
+
+                    for (JeopardyQuestion g : questions)
+                        if (g.getQuestion().contains(queryKeyword))
+                            System.out.println(g);
+
+                    for (JeopardyQuestion g : questions)
+                        if (g.getAnswer().contains(queryKeyword))
+                            System.out.println(g);
+                    break;
                 case 4:
+                    System.out.println("Search Final Jeopardy by Year");
+
+                    String fjDate;
+                    fjDate = scn.next();
+                    do
+                    {
+                        System.out.println("Invalid Entry - Please input a year.");
+                        fjDate = scn.next();
+                    } while (fjDate.length()>4);
+
+                    for (JeopardyQuestion d : questions)
+                        if (d.getShowDate().contains(fjDate) && d.getRound().contains("Final Jeopardy!"))
+                            System.out.println(d);
+                    break;
                 case 0:
                     System.out.println("Thanks for using Jeopardy Data Search!");
                     break;
