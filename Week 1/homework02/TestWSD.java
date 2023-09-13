@@ -1,6 +1,7 @@
 // Delta College - CST 283 - Homework 1
 // Name:  
 
+import java.util.Scanner;
 public class TestWSD
 {
    public static void main(String[] args)
@@ -10,13 +11,22 @@ public class TestWSD
 
    // -------------------------------------------------
    // Method wsd(int)
-   public static int wsd(int number)
+   public static int wsd(int x)
    {
 
-      // Complete this method
+      // Converts the 1776 Int to String
+      // Length of the String is looped, and then the weight is identified
+      String stringNum = Integer.toString(x);
+      int sum;
 
+      sum = 0;
 
-      return 0;
+      for(int i = stringNum.length(); i != 0; i--)
+      {
+         sum += x % 10 * i;
+         x /= 10;
+      }
+      return sum;
    }
    
    

@@ -25,5 +25,4 @@ public class TestLinFun
         for (double x = 0; x <= 10; x+=2.0)
             System.out.println(x + "   " + function2.calcY(x));
     }
-}  
-
+}
